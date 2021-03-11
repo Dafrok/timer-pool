@@ -28,14 +28,13 @@ function createClearTimerFn(fn, name) {
         if (typeof args[0] === 'number') {
             return fn(args[0]);
         }
-        if (typeof args[0] === 'string') {
-            const group = pool[name][args[0]];
-            if (!group) {
-                return;
-            }
-            while (group.length) {
-                fn(group.pop());
-            }
+        args[0] = args[0] || '';
+        const group = pool[name][args[0]];
+        if (!group) {
+            return;
+        }
+        while (group.length) {
+            fn(group.pop());
         }
     };
 }
